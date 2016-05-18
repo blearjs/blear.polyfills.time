@@ -1,7 +1,7 @@
 {
   "name": "blear.polyfills.time",
-  "version": "1.0.0",
-  "description": "blear.polyfills.time description",
+  "version": "1.0.1",
+  "description": "time polyfills to IE8",
   "scripts": {},
   "preferGlobal": false,
   "bin": {},
@@ -11,6 +11,10 @@
   },
   "main": "src/index.js",
   "keywords": [
+    "blear",
+    "polyfills",
+    "time",
+    "requestAnimationFrame",
     "cloudcome",
     "ydr.me"
   ],
