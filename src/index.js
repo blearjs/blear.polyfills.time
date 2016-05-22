@@ -1,7 +1,7 @@
 'use strict';
 
 
-if (typeof NODE_ENV === 'undefined') {
+if (typeof navigator !== 'undefined') {
     var win = window;
 
     /* rAF shim. Gist: https://gist.github.com/julianshapiro/9497513 */
