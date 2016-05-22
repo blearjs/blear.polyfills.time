@@ -1,32 +1,35 @@
 'use strict';
 
-var win = window;
 
-/* rAF shim. Gist: https://gist.github.com/julianshapiro/9497513 */
-win.requestAnimationFrame = (function () {
-    var timeLast = 0;
+if (typeof NODE_ENV === 'undefined') {
+    var win = window;
 
-    return win.requestAnimationFrame ||
-        win.webkitRequestAnimationFrame ||
-        win.mozRequestAnimationFrame ||
-        function (callback) {
-            var timeCurrent = (new Date()).getTime(),
-                timeDelta;
+    /* rAF shim. Gist: https://gist.github.com/julianshapiro/9497513 */
+    win.requestAnimationFrame = (function () {
+        var timeLast = 0;
 
-            /* Dynamically set delay on a per-tick basis to match 60fps. */
-            /* Technique by Erik Moller. MIT license: https://gist.github.com/paulirish/1579671 */
-            timeDelta = Math.max(0, 16 - (timeCurrent - timeLast));
-            timeLast = timeCurrent + timeDelta;
+        return win.requestAnimationFrame ||
+            win.webkitRequestAnimationFrame ||
+            win.mozRequestAnimationFrame ||
+            function (callback) {
+                var timeCurrent = (new Date()).getTime(),
+                    timeDelta;
 
-            return setTimeout(function () {
-                callback(timeCurrent + timeDelta);
-            }, timeDelta);
-        };
-})();
+                /* Dynamically set delay on a per-tick basis to match 60fps. */
+                /* Technique by Erik Moller. MIT license: https://gist.github.com/paulirish/1579671 */
+                timeDelta = Math.max(0, 16 - (timeCurrent - timeLast));
+                timeLast = timeCurrent + timeDelta;
 
-win.cancelAnimationFrame = (function () {
-    return win.cancelAnimationFrame ||
-        win.webkitCancelAnimationFrame ||
-        win.mozCancelAnimationFrame ||
-        win.clearTimeout;
-})();
+                return setTimeout(function () {
+                    callback(timeCurrent + timeDelta);
+                }, timeDelta);
+            };
+    })();
+
+    win.cancelAnimationFrame = (function () {
+        return win.cancelAnimationFrame ||
+            win.webkitCancelAnimationFrame ||
+            win.mozCancelAnimationFrame ||
+            win.clearTimeout;
+    })();
+}
